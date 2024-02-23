@@ -6,6 +6,7 @@ import { faCoffee } from "@fortawesome/free-solid-svg-icons";
 import "tailwindcss/tailwind.css";
 import "./assets/main.css"; // 導入自定義 CSS 樣式
 import i18n from "./plugins/i18n";
+import "bootstrap/dist/css/bootstrap.css";
 
 library.add(faCoffee); // 將icon添加到 Font Awesome 圖庫中
 
