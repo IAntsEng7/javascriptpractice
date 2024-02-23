@@ -8,6 +8,9 @@
       <div>Main</div>
 
       <div><font-awesome-icon icon="coffee" /></div>
+      <div>
+        <button class="btn btn-primary">Primary Button</button>
+      </div>
     </main>
   </div>
 </template>
