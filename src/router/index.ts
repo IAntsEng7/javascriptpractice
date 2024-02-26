@@ -1,13 +1,15 @@
-import { createRouter, createWebHistory } from "vue-router";
+import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 
-import CaerusIntro from "../components/CaerusIntro.vue";
 import HomeIndex from "../components/HomeIndex.vue";
+import LearnRoutes from "./learn";
+import IntroRoutes from "./intro";
 
-const routes = [
+const routes: RouteRecordRaw[] = [
   { path: "/", component: HomeIndex },
-  { path: "/caerusIntro", component: CaerusIntro },
-  // { path: "/component1", component: Component1 },
-  // { path: "/component2", component: Component2 },
+  // 将 /learn/ 下的子路由配置添加到主路由中
+  ...LearnRoutes,
+  // 将 /intro/ 下的子路由配置添加到主路由中
+  ...IntroRoutes,
   // 其他路由配置
 ];
 

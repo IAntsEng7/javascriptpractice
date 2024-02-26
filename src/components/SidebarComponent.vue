@@ -1,17 +1,73 @@
 <template>
   <div class="sidebar">
-    <!-- 左側選單按鈕 -->
+    <!-- 左側選單 -->
     <router-link to="/" class="router-button">Home Index</router-link>
-    <router-link to="/caerusIntro" class="router-button"
-      >Caerus Intro</router-link
-    >
+    <router-link to="/learn/Java" class="router-button">Java Test</router-link>
+    <div id="sidebarAccordion" class="accordion">
+      <!-- Intro -->
+      <div class="accordion-item">
+        <h2 id="headingIntro" class="accordion-header">
+          <button
+            class="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapseIntro"
+            aria-expanded="false"
+            aria-controls="collapseIntro"
+          >
+            Intro
+          </button>
+        </h2>
+        <div
+          id="collapseIntro"
+          class="accordion-collapse collapse"
+          aria-labelledby="headingIntro"
+          data-bs-parent="#sidebarAccordion"
+        >
+          <div class="accordion-body">
+            <router-link to="/intro/CaerusIntro" class="router-button"
+              >Intro</router-link
+            >
+          </div>
+        </div>
+      </div>
+      <!-- Learn -->
+      <div class="accordion-item">
+        <h2 id="headingLearn" class="accordion-header">
+          <button
+            class="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapseLearn"
+            aria-expanded="false"
+            aria-controls="collapseLearn"
+          >
+            Learn
+          </button>
+        </h2>
+        <div
+          id="collapseLearn"
+          class="accordion-collapse collapse"
+          aria-labelledby="headingLearn"
+          data-bs-parent="#sidebarAccordion"
+        >
+          <div class="accordion-body">
+            <router-link to="/learn/Java" class="router-button"
+              >Java 1</router-link
+            >
+            <router-link to="/learn/JavaScript" class="router-button"
+              >JavaScript 2</router-link
+            >
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
   <div class="content">
     <!-- 右側內容插槽 -->
     <slot></slot>
   </div>
 </template>
-
 <script>
 export default {};
 </script>
