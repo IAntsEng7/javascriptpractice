@@ -1,25 +1,26 @@
 <template>
-  <div class="container">
-    <header>
-      <div>Header</div>
-    </header>
-
-    <main>
-      <div>Main</div>
-
-      <div><font-awesome-icon icon="coffee" /></div>
+  <div class="app">
+    <sidebar-component>
+      <!-- 將右側內容放到插槽內 -->
       <div>
-        <button class="btn btn-primary">Primary Button</button>
+        <!-- 放置需要渲染在右側的內容 -->
+        <router-view />
       </div>
-    </main>
+    </sidebar-component>
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script>
+import { defineComponent } from "vue";
+import SidebarComponent from "@/components/SidebarComponent.vue";
 
-<style scoped>
-.container {
+export default defineComponent({
+  components: { SidebarComponent },
+});
+</script>
+
+<style>
+.app {
   display: flex;
-  flex-direction: column;
 }
 </style>

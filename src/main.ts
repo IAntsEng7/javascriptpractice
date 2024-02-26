@@ -7,12 +7,14 @@ import "tailwindcss/tailwind.css";
 import "./assets/main.css"; // 導入自定義 CSS 樣式
 import i18n from "./plugins/i18n";
 import "bootstrap/dist/css/bootstrap.css";
+import router from "./router";
 
 library.add(faCoffee); // 將icon添加到 Font Awesome 圖庫中
 
 const app = createApp(App);
 
 app.use(i18n); // 使用 i18n 插件
+app.use(router);
 
 app.component("FontAwesomeIcon", FontAwesomeIcon); // 全域註冊 FontAwesomeIcon
 
