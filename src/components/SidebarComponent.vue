@@ -3,64 +3,58 @@
     <!-- 左側選單 -->
     <router-link to="/" class="router-button">Home Index</router-link>
     <router-link to="/learn/Java" class="router-button">Java Test</router-link>
-    <div id="sidebarAccordion" class="accordion">
-      <!-- Intro -->
+    <div id="accordionExample" class="accordion">
       <div class="accordion-item">
-        <h2 id="headingIntro" class="accordion-header">
+        <h2 id="headingOne" class="accordion-header">
           <button
-            class="accordion-button collapsed"
+            class="accordion-button"
             type="button"
             data-bs-toggle="collapse"
-            data-bs-target="#collapseIntro"
-            aria-expanded="false"
-            aria-controls="collapseIntro"
+            data-bs-target="#collapseOne"
+            :aria-expanded="accordionState['collapseOne']"
+            @click="toggleAccordion('collapseOne')"
           >
-            Intro
+            Item #1
           </button>
         </h2>
         <div
-          id="collapseIntro"
+          id="collapseOne"
           class="accordion-collapse collapse"
-          aria-labelledby="headingIntro"
-          data-bs-parent="#sidebarAccordion"
+          :class="{ show: accordionState['collapseOne'] }"
+          aria-labelledby="headingOne"
+          data-bs-parent="#accordionExample"
         >
           <div class="accordion-body">
-            <router-link to="/intro/CaerusIntro" class="router-button"
-              >Intro</router-link
-            >
+            {{ accordionContent["collapseOne"] }}1111111111
           </div>
         </div>
       </div>
-      <!-- Learn -->
       <div class="accordion-item">
-        <h2 id="headingLearn" class="accordion-header">
+        <h2 id="headingTwo" class="accordion-header">
           <button
-            class="accordion-button collapsed"
+            class="accordion-button"
             type="button"
             data-bs-toggle="collapse"
-            data-bs-target="#collapseLearn"
-            aria-expanded="false"
-            aria-controls="collapseLearn"
+            data-bs-target="#collapseTwo"
+            :aria-expanded="accordionState['collapseTwo']"
+            @click="toggleAccordion('collapseTwo')"
           >
-            Learn
+            Item #2
           </button>
         </h2>
         <div
-          id="collapseLearn"
+          id="collapseTwo"
           class="accordion-collapse collapse"
-          aria-labelledby="headingLearn"
-          data-bs-parent="#sidebarAccordion"
+          :class="{ show: accordionState['collapseTwo'] }"
+          aria-labelledby="headingTwo"
+          data-bs-parent="#accordionExample"
         >
           <div class="accordion-body">
-            <router-link to="/learn/Java" class="router-button"
-              >Java 1</router-link
-            >
-            <router-link to="/learn/JavaScript" class="router-button"
-              >JavaScript 2</router-link
-            >
+            {{ accordionContent["collapseTwo"] }} 22222222222
           </div>
         </div>
       </div>
+      <!-- 其他折叠项类似上面的结构 -->
     </div>
   </div>
   <div class="content">
@@ -68,8 +62,26 @@
     <slot></slot>
   </div>
 </template>
+
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      accordionState: {
+        collapseOne: true,
+      },
+      accordionContent: {
+        collapseOne: "Content for collapseOne",
+        collapseTwo: "Content for collapseTwo",
+      },
+    };
+  },
+  methods: {
+    toggleAccordion(accordionId) {
+      this.accordionState[accordionId] = !this.accordionState[accordionId];
+    },
+  },
+};
 </script>
 
 <style scoped>
@@ -103,5 +115,13 @@ export default {};
 .router-button:hover {
   background-color: #999;
   color: #fff;
+}
+
+.accordion-body {
+  display: block;
+}
+
+.accordion-collapse {
+  height: auto;
 }
 </style>
