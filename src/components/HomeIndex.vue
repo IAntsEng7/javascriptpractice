@@ -1,4 +1,11 @@
 <template>
   <a>Home Index screen</a>
 </template>
-<script></script>
+
+<script>
+export default {
+  mounted() {
+    console.log("Home Index component mounted");
+  },
+};
+</script>

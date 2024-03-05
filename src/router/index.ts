@@ -1,16 +1,14 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
+import Intro from "@/router/intro";
+import Learn from "@/router/learn";
 
-import HomeIndex from "../components/HomeIndex.vue";
-import LearnRoutes from "./learn";
-import IntroRoutes from "./intro";
-
-const routes: RouteRecordRaw[] = [
-  { path: "/", component: HomeIndex },
-  // 将 /learn/ 下的子路由配置添加到主路由中
-  ...LearnRoutes,
-  // 将 /intro/ 下的子路由配置添加到主路由中
-  ...IntroRoutes,
-  // 其他路由配置
+const routes: Array<RouteRecordRaw> = [
+  {
+    path: "/",
+    component: () => import("@/components/HomeIndex.vue"),
+  },
+  Intro,
+  Learn,
 ];
 
 const router = createRouter({

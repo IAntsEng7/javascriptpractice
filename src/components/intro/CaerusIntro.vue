@@ -1,2 +1,8 @@
 <template>Caerus Intro</template>
-<script></script>
+<script>
+export default {
+  mounted() {
+    console.log("Caerus Intro component mounted");
+  },
+};
+</script>
