@@ -7,7 +7,10 @@
       <div class="accordion-item">
         <h2 id="headingOne" class="accordion-header">
           <button
-            class="accordion-button"
+            :class="{
+              'accordion-button': true,
+              collapsed: !accordionState['collapseOne'],
+            }"
             type="button"
             data-bs-toggle="collapse"
             data-bs-target="#collapseOne"
@@ -25,14 +28,17 @@
           data-bs-parent="#accordionExample"
         >
           <div class="accordion-body">
-            {{ accordionContent["collapseOne"] }}1111111111
+            {{ accordionContent["collapseOne"] }}
           </div>
         </div>
       </div>
       <div class="accordion-item">
         <h2 id="headingTwo" class="accordion-header">
           <button
-            class="accordion-button"
+            :class="{
+              'accordion-button': true,
+              collapsed: !accordionState['collapseTwo'],
+            }"
             type="button"
             data-bs-toggle="collapse"
             data-bs-target="#collapseTwo"
@@ -50,11 +56,11 @@
           data-bs-parent="#accordionExample"
         >
           <div class="accordion-body">
-            {{ accordionContent["collapseTwo"] }} 22222222222
+            {{ accordionContent["collapseTwo"] }}
           </div>
         </div>
       </div>
-      <!-- 其他折叠项类似上面的结构 -->
+      <!-- 其他手風琴 -->
     </div>
   </div>
   <div class="content">
@@ -68,7 +74,8 @@ export default {
   data() {
     return {
       accordionState: {
-        collapseOne: true,
+        collapseOne: false,
+        collapseTwo: false,
       },
       accordionContent: {
         collapseOne: "Content for collapseOne",
@@ -105,7 +112,7 @@ export default {
   margin-bottom: 8px;
   border: none;
   border-radius: 4px;
-  background-color: #ccc;
+  background-color: #ffffff;
   color: #333;
   cursor: pointer;
   text-align: center; /* 文字居中 */
@@ -113,15 +120,17 @@ export default {
 }
 
 .router-button:hover {
-  background-color: #999;
+  background-color: #2b2b2f; /* 滑鼠移動過去的背景色 */
   color: #fff;
 }
 
-.accordion-body {
-  display: block;
+.accordion-button.collapsed {
+  background-color: rgb(255, 255, 255); /* 按鈕關閉時的背景色 */
+  color: #333; /* 按鈕關閉時的文字色 */
 }
 
-.accordion-collapse {
-  height: auto;
+.accordion-button:not(.collapsed) {
+  background-color: rgb(255, 255, 255); /* 按鈕打開時的背景色 */
+  color: rgb(90, 89, 89); /* 按鈕打開時的文字色 */
 }
 </style>
