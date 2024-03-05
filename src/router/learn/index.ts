@@ -1,5 +1,6 @@
 import { RouteRecordRaw } from "vue-router";
 import LearnIntro from "@/components/learn/LearnIntro.vue";
+import JavaLearn from "@/components/learn/java/JavaLearn.vue";
 
 const route: RouteRecordRaw = {
   path: "/learn",
@@ -12,6 +13,10 @@ const route: RouteRecordRaw = {
     {
       path: "learnIntro",
       component: LearnIntro,
+    },
+    {
+      path: "Java",
+      component: JavaLearn,
     },
   ],
 };

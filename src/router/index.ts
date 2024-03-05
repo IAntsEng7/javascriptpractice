@@ -6,9 +6,8 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
     component: () => import("@/components/HomeIndex.vue"),
+    children: [Intro, Learn],
   },
-  Intro,
-  Learn,
 ];
 
 const router = createRouter({
