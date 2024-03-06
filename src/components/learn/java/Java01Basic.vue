@@ -1,5 +1,5 @@
 <template>Java 01 Basic</template>
-<script>
+<script lang="ts">
 export default {
   mounted() {
     console.log("Java 01 component mounted");

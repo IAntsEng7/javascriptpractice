@@ -2,7 +2,9 @@
   <div class="sidebar">
     <!-- 左側選單 -->
     <router-link to="/" class="router-button">Home Index</router-link>
-    <router-link to="/learn/Java" class="router-button">Java Test</router-link>
+    <router-link to="/learn/learnIntro" class="router-button"
+      >Learn Intro</router-link
+    >
     <div id="accordionExample" class="accordion">
       <div class="accordion-item">
         <h2 id="headingOne" class="accordion-header">
@@ -69,14 +71,14 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 export default {
   data() {
     return {
       accordionState: {
         collapseOne: false,
         collapseTwo: false,
-      },
+      } as { [key: string]: boolean },
       accordionContent: {
         collapseOne: "Content for collapseOne",
         collapseTwo: "Content for collapseTwo",
@@ -84,8 +86,13 @@ export default {
     };
   },
   methods: {
-    toggleAccordion(accordionId) {
-      this.accordionState[accordionId] = !this.accordionState[accordionId];
+    toggleAccordion(accordionId: string) {
+      if (accordionId in this.accordionState) {
+        this.accordionState[accordionId] = !this.accordionState[accordionId];
+      } else {
+        // 如果accordionId不在accordionState對象中，這裡可能需要處理錯誤情況
+        console.error("Invalid accordionId:", accordionId);
+      }
     },
   },
 };

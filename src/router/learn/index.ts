@@ -3,7 +3,7 @@ import LearnIntro from "@/components/learn/LearnIntro.vue";
 import JavaLearn from "@/components/learn/java/JavaLearn.vue";
 
 const route: RouteRecordRaw = {
-  path: "/learn",
+  path: "learn",
   component: LearnIntro,
   children: [
     {
@@ -11,7 +11,7 @@ const route: RouteRecordRaw = {
       redirect: "learnIntro",
     },
     {
-      path: "learnIntro",
+      path: "/learnIntro",
       component: LearnIntro,
     },
     {

@@ -10,7 +10,7 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import { defineComponent } from "vue";
 import SidebarComponent from "@/components/SidebarComponent.vue";
 
