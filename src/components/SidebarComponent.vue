@@ -2,9 +2,7 @@
   <div class="sidebar">
     <!-- 左側選單 -->
     <router-link to="/" class="router-button">Home Index</router-link>
-    <router-link to="/learn/learnIntro" class="router-button"
-      >Learn Intro</router-link
-    >
+    <router-link to="/learn" class="router-button">Learn Intro</router-link>
     <div id="accordionExample" class="accordion">
       <div class="accordion-item">
         <h2 id="headingOne" class="accordion-header">
