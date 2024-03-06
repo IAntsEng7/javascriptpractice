@@ -4,63 +4,39 @@
     <router-link to="/" class="router-button">Home Index</router-link>
     <router-link to="/learn" class="router-button">Learn Intro</router-link>
     <div id="accordionExample" class="accordion">
-      <div class="accordion-item">
-        <h2 id="headingOne" class="accordion-header">
+      <div
+        v-for="[itemId, item] in Object.entries(accordionContent)"
+        :key="itemId"
+        class="accordion-item"
+      >
+        <h2 :id="`heading${itemId}`" class="accordion-header">
           <button
             :class="{
               'accordion-button': true,
-              collapsed: !accordionState['collapseOne'],
+              collapsed: !state.accordionState[itemId],
             }"
             type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#collapseOne"
-            :aria-expanded="accordionState['collapseOne']"
-            @click="toggleAccordion('collapseOne')"
+            :data-bs-target="`#${itemId}`"
+            :aria-expanded="state.accordionState[itemId]"
+            @click="toggleAccordion(itemId)"
           >
-            Item #1
+            Item #{{ itemId }}
           </button>
         </h2>
         <div
-          id="collapseOne"
+          :id="itemId"
           class="accordion-collapse collapse"
-          :class="{ show: accordionState['collapseOne'] }"
-          aria-labelledby="headingOne"
+          :class="{ show: state.accordionState[itemId] }"
+          :aria-labelledby="`heading${itemId}`"
           data-bs-parent="#accordionExample"
         >
           <div class="accordion-body">
-            {{ accordionContent["collapseOne"] }}
+            <div v-for="(link, index) in item.links" :key="index">
+              <router-link :to="link.link">{{ link.content }}</router-link>
+            </div>
           </div>
         </div>
       </div>
-      <div class="accordion-item">
-        <h2 id="headingTwo" class="accordion-header">
-          <button
-            :class="{
-              'accordion-button': true,
-              collapsed: !accordionState['collapseTwo'],
-            }"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#collapseTwo"
-            :aria-expanded="accordionState['collapseTwo']"
-            @click="toggleAccordion('collapseTwo')"
-          >
-            Item #2
-          </button>
-        </h2>
-        <div
-          id="collapseTwo"
-          class="accordion-collapse collapse"
-          :class="{ show: accordionState['collapseTwo'] }"
-          aria-labelledby="headingTwo"
-          data-bs-parent="#accordionExample"
-        >
-          <div class="accordion-body">
-            {{ accordionContent["collapseTwo"] }}
-          </div>
-        </div>
-      </div>
-      <!-- 其他手風琴 -->
     </div>
   </div>
   <div class="content">
@@ -70,30 +46,66 @@
 </template>
 
 <script lang="ts">
-export default {
-  data() {
-    return {
+import { defineComponent, reactive } from "vue";
+
+interface AccordionLink {
+  content: string;
+  link: string;
+}
+
+interface AccordionItem<T extends string> {
+  id: T;
+  links: AccordionLink[];
+}
+
+interface AccordionState {
+  [key: string]: boolean;
+}
+
+const accordionContent: Record<string, AccordionItem<string>> = {
+  collapseOne: {
+    id: "collapseOne",
+    links: [
+      { content: "Link 1", link: "/link1" },
+      { content: "Link 2", link: "/link2" },
+      { content: "Link 3", link: "/link3" },
+    ],
+  },
+  collapseTwo: {
+    id: "collapseTwo",
+    links: [
+      { content: "Link A", link: "/linkA" },
+      { content: "Link B", link: "/linkB" },
+    ],
+  },
+};
+
+export default defineComponent({
+  setup() {
+    const state = reactive<{
+      accordionState: AccordionState;
+    }>({
       accordionState: {
         collapseOne: false,
         collapseTwo: false,
-      } as { [key: string]: boolean },
-      accordionContent: {
-        collapseOne: "Content for collapseOne",
-        collapseTwo: "Content for collapseTwo",
       },
-    };
-  },
-  methods: {
-    toggleAccordion(accordionId: string) {
-      if (accordionId in this.accordionState) {
-        this.accordionState[accordionId] = !this.accordionState[accordionId];
+    });
+
+    const toggleAccordion = (accordionId: string) => {
+      if (accordionId in state.accordionState) {
+        state.accordionState[accordionId] = !state.accordionState[accordionId];
       } else {
-        // 如果accordionId不在accordionState對象中，這裡可能需要處理錯誤情況
         console.error("Invalid accordionId:", accordionId);
       }
-    },
+    };
+
+    return {
+      accordionContent,
+      state,
+      toggleAccordion,
+    };
   },
-};
+});
 </script>
 
 <style scoped>
