@@ -6,7 +6,11 @@ import eslintPlugin from "vite-plugin-eslint"; // ** add this for ESLint: auto f
 
 export default defineConfig({
   plugins: [
-    vue(),
+    vue({
+      script: {
+        setup: true,
+      },
+    }),
     eslintPlugin({ cache: false }), // ** add this for ESLint: auto format when save **
   ],
   resolve: {
