@@ -1,0 +1,46 @@
+<script setup> 提供了更簡潔的組合式 API 語法，並直接在 <script setup> 區塊中使用 imports 和 top-level awaits。
+要在 Vue 3 的組件中使用 <script setup> 語法，需要確保專案已設定支援此語法。
+
+以下是設定步驟:
+    1.  確保使用 Vue 3 版本
+    2.  啟用 Vite 或 Webpack 對應的插件(專案使用Vite)
+        a. 使用 Vite 建置工具，需要安裝 @vitejs/plugin-vue 插件並在 vite.config.js 中設定:
+            // 安裝 @vitejs/plugin-vue
+            (注意!! 如果是使用 Vue CLI 建立的專案，Vue CLI 在建置設定中已經預設啟用了這些插件的支援，不需要再另外安裝。)
+            npm install --save-dev @vitejs/plugin-vue
+
+            // vite.config.js
+            import vue from '@vitejs/plugin-vue'
+
+            export default {
+              plugins: [
+                vue({
+                  script: {
+                    setup: true
+                  }
+                })
+              ]
+            }
+        b. 使用 Webpack 建置工具，需要安裝 @vue/compiler-sfc 插件並在 Webpack 設定中加入:
+            // 安裝 @vue/compiler-sfc
+            (注意!! 如果是使用 Vue CLI 建立的專案，Vue CLI 在建置設定中已經預設啟用了這些插件的支援，不需要再另外安裝。)
+            npm install --save-dev @vue/compiler-sfc vue-loader
+
+            // webpack.config.js
+            const { VueLoaderPlugin } = require('vue-loader')
+
+            module.exports = {
+              module: {
+                rules: [
+                  {
+                    test: /\.vue$/,
+                    use: 'vue-loader'
+                  }
+                ]
+              },
+              plugins: [
+                new VueLoaderPlugin()
+              ]
+            }
+    3.  設定組件選項中的 script 設為 setup
+        當上述設定完成後，就可以在 .vue 單檔元件中使用 <script setup> 語法了。
