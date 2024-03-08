@@ -2,7 +2,7 @@
   <div class="sidebar">
     <!-- 左側選單 -->
     <router-link to="/" class="router-button">Home Index</router-link>
-    <router-link to="/learn" class="router-button">Learn Intro</router-link>
+    <router-link to="/learn" class="router-button">Learn Layout</router-link>
     <div id="accordionExample" class="accordion">
       <div
         v-for="[itemId, item] in Object.entries(accordionContent)"
