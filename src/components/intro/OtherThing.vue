@@ -1,8 +1,7 @@
 <template>Other Thing</template>
-<script>
-export default {
-  mounted() {
-    console.log("Other Thing component mounted");
-  },
-};
+<script setup lang="ts">
+init();
+function init() {
+  console.log("Other Thing component mounted");
+}
 </script>

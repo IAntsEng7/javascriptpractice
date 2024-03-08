@@ -5,7 +5,7 @@
   </div>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 init();
 function init() {
   console.log("Home Index component mounted");

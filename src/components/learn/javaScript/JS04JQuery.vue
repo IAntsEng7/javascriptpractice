@@ -1,2 +1,2 @@
 <template>Java Script 03</template>
-<script lang="ts"></script>
+<script setup lang="ts"></script>

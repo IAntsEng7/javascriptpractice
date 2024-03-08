@@ -1,8 +1,8 @@
 <template>Java 02 Advanced</template>
-<script lang="ts">
-export default {
-  mounted() {
-    console.log("Java 02 component mounted");
-  },
-};
+
+<script setup lang="ts">
+init();
+function init() {
+  console.log("Java 02 component mounted");
+}
 </script>
