@@ -1,7 +1,7 @@
 <template>
   <div class="sidebar">
     <!-- 左側選單 -->
-    <router-link to="/" class="router-button">Home Index</router-link>
+    <router-link to="/" class="router-button">Home</router-link>
     <router-link to="/learn" class="router-button">Learn Layout</router-link>
     <div id="accordionExample" class="accordion">
       <div
@@ -20,7 +20,7 @@
             :aria-expanded="state.accordionState[itemId]"
             @click="toggleAccordion(itemId)"
           >
-            Item #{{ itemId }}
+            {{ itemId }}
           </button>
         </h2>
         <div
@@ -32,7 +32,9 @@
         >
           <div class="accordion-body">
             <div v-for="(link, index) in item.links" :key="index">
-              <router-link :to="link.link">{{ link.content }}</router-link>
+              <router-link class="router-button" :to="link.link">{{
+                link.content
+              }}</router-link>
             </div>
           </div>
         </div>
@@ -63,19 +65,31 @@ interface AccordionState {
 }
 
 const accordionContent: Record<string, AccordionItem<string>> = {
-  collapseOne: {
-    id: "collapseOne",
+  FrontEnd: {
+    id: "FrontEnd",
     links: [
-      { content: "Link 1", link: "/link1" },
-      { content: "Link 2", link: "/link2" },
-      { content: "Link 3", link: "/link3" },
+      { content: "JavaScript", link: "/link1" },
+      { content: "TypeScript", link: "/link2" },
+      { content: "Vue 3", link: "/link3" },
+      { content: "BootStrap", link: "/link3" },
+      { content: "jQuery", link: "/link3" },
+      { content: "Ajax", link: "/link3" },
     ],
   },
-  collapseTwo: {
-    id: "collapseTwo",
+  BackEnd: {
+    id: "BackEnd",
     links: [
-      { content: "Link A", link: "/linkA" },
-      { content: "Link B", link: "/linkB" },
+      { content: "Java", link: "/linkA" },
+      { content: "Python", link: "/linkB" },
+      { content: "Rust", link: "/linkC" },
+    ],
+  },
+  DataBase: {
+    id: "DataBase",
+    links: [
+      { content: "DBMS", link: "/linkA1" },
+      { content: "NoSQL", link: "/linkB2" },
+      { content: "NewSQL", link: "/linkC3" },
     ],
   },
 };
@@ -86,8 +100,9 @@ export default defineComponent({
       accordionState: AccordionState;
     }>({
       accordionState: {
-        collapseOne: false,
-        collapseTwo: false,
+        FrontEnd: false,
+        BackEnd: false,
+        DataBase: false,
       },
     });
 
@@ -137,7 +152,7 @@ export default defineComponent({
 }
 
 .router-button:hover {
-  background-color: #2b2b2f; /* 滑鼠移動過去的背景色 */
+  background-color: rgb(120, 120, 120); /* 滑鼠移動過去的背景色 */
   color: #fff;
 }
 
@@ -147,7 +162,7 @@ export default defineComponent({
 }
 
 .accordion-button:not(.collapsed) {
-  background-color: rgb(255, 255, 255); /* 按鈕打開時的背景色 */
-  color: rgb(90, 89, 89); /* 按鈕打開時的文字色 */
+  background-color: rgb(90, 90, 90); /* 按鈕打開時的背景色 */
+  color: rgb(255, 255, 255); /* 按鈕打開時的文字色 */
 }
 </style>
