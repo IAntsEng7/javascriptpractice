@@ -67,7 +67,7 @@ interface AccordionState {
 
 const accordionContent: Record<string, AccordionItem<string>> = {
   FrontEnd: {
-    id: "FrontEnd",
+    id: "frontend",
     links: [
       { content: "JavaScript", link: "/frontend/javascript" },
       { content: "TypeScript", link: "/frontend/typescript" },
@@ -75,7 +75,7 @@ const accordionContent: Record<string, AccordionItem<string>> = {
     ],
   },
   BackEnd: {
-    id: "BackEnd",
+    id: "backend",
     links: [
       { content: "Java", link: "/backend/java" },
       { content: "Python", link: "/backend/python" },
@@ -83,7 +83,7 @@ const accordionContent: Record<string, AccordionItem<string>> = {
     ],
   },
   DataBase: {
-    id: "DataBase",
+    id: "database",
     links: [
       { content: "DBMS", link: "/database/dbms" },
       { content: "NoSQL", link: "/database/nosql" },
@@ -108,26 +108,28 @@ export default defineComponent({
 
     const toggleAccordion = (accordionId: string) => {
       if (accordionId in state.accordionState) {
-        state.accordionState[accordionId] = !state.accordionState[accordionId];
-        if (state.accordionState[accordionId]) {
-          router.push(accordionContent[accordionId].id);
+        if (!state.accordionState[accordionId]) {
+          router.push(`/${accordionId}`);
         }
+        // closeAccordions(accordionId); // 暫留：關於關掉手風琴的東西
+        state.accordionState[accordionId] = !state.accordionState[accordionId];
       } else {
         console.error("Invalid accordionId:", accordionId);
       }
     };
 
-    const closeAccordions = (currentId: string) => {
-      for (const id in state.accordionState) {
-        if (id !== currentId) {
-          state.accordionState[id] = false;
-        }
-      }
-    };
+    // 暫留：關於關掉手風琴的東西
+    // const closeAccordions = (currentId: string) => {
+    //   for (const id in state.accordionState) {
+    //     if (id !== currentId) {
+    //       state.accordionState[id] = false;
+    //     }
+    //   }
+    // };
 
     const handleAccordionClick = (itemId: string) => {
       toggleAccordion(itemId);
-      closeAccordions(itemId);
+      // closeAccordions(itemId); // 暫留：關於關掉手風琴的東西
     };
 
     return {
