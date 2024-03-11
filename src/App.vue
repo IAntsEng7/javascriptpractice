@@ -12,7 +12,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import SidebarComponent from "@/components/SidebarComponent.vue";
+import SidebarComponent from "@/components/sidebar-component.vue";
 
 export default defineComponent({
   components: { SidebarComponent },

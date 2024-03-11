@@ -18,7 +18,7 @@
             type="button"
             :data-bs-target="`#${itemId}`"
             :aria-expanded="state.accordionState[itemId]"
-            @click="toggleAccordion(itemId)"
+            @click="handleAccordionClick(itemId)"
           >
             {{ itemId }}
           </button>
@@ -49,6 +49,7 @@
 
 <script lang="ts">
 import { defineComponent, reactive } from "vue";
+import { useRouter } from "vue-router";
 
 interface AccordionLink {
   content: string;
@@ -68,34 +69,34 @@ const accordionContent: Record<string, AccordionItem<string>> = {
   FrontEnd: {
     id: "FrontEnd",
     links: [
-      { content: "JavaScript", link: "/link1" },
-      { content: "TypeScript", link: "/link2" },
-      { content: "Vue 3", link: "/link3" },
-      { content: "BootStrap", link: "/link3" },
-      { content: "jQuery", link: "/link3" },
-      { content: "Ajax", link: "/link3" },
+      { content: "JavaScript", link: "/frontend/javascript" },
+      { content: "TypeScript", link: "/frontend/link2" },
+      { content: "Vue 3", link: "/frontend/link3" },
+      { content: "BootStrap", link: "/frontend/link3" },
     ],
   },
   BackEnd: {
     id: "BackEnd",
     links: [
-      { content: "Java", link: "/linkA" },
-      { content: "Python", link: "/linkB" },
-      { content: "Rust", link: "/linkC" },
+      { content: "Java", link: "/backend/linkA" },
+      { content: "Python", link: "/backend/linkB" },
+      { content: "Rust", link: "/backend/linkC" },
     ],
   },
   DataBase: {
     id: "DataBase",
     links: [
-      { content: "DBMS", link: "/linkA1" },
-      { content: "NoSQL", link: "/linkB2" },
-      { content: "NewSQL", link: "/linkC3" },
+      { content: "DBMS", link: "/database/linkA1" },
+      { content: "NoSQL", link: "/database/linkB2" },
+      { content: "NewSQL", link: "/database/linkC3" },
     ],
   },
 };
 
 export default defineComponent({
   setup() {
+    const router = useRouter();
+
     const state = reactive<{
       accordionState: AccordionState;
     }>({
@@ -109,15 +110,31 @@ export default defineComponent({
     const toggleAccordion = (accordionId: string) => {
       if (accordionId in state.accordionState) {
         state.accordionState[accordionId] = !state.accordionState[accordionId];
+        if (state.accordionState[accordionId]) {
+          router.push(accordionContent[accordionId].links[0].link);
+        }
       } else {
         console.error("Invalid accordionId:", accordionId);
       }
     };
 
+    const closeAccordions = (currentId: string) => {
+      for (const id in state.accordionState) {
+        if (id !== currentId) {
+          state.accordionState[id] = false;
+        }
+      }
+    };
+
+    const handleAccordionClick = (itemId: string) => {
+      toggleAccordion(itemId);
+      closeAccordions(itemId);
+    };
+
     return {
       accordionContent,
       state,
-      toggleAccordion,
+      handleAccordionClick,
     };
   },
 });
