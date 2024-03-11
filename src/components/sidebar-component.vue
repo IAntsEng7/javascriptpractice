@@ -70,25 +70,24 @@ const accordionContent: Record<string, AccordionItem<string>> = {
     id: "FrontEnd",
     links: [
       { content: "JavaScript", link: "/frontend/javascript" },
-      { content: "TypeScript", link: "/frontend/link2" },
-      { content: "Vue 3", link: "/frontend/link3" },
-      { content: "BootStrap", link: "/frontend/link3" },
+      { content: "TypeScript", link: "/frontend/typescript" },
+      { content: "Vue 3", link: "/frontend/vue3" },
     ],
   },
   BackEnd: {
     id: "BackEnd",
     links: [
-      { content: "Java", link: "/backend/linkA" },
-      { content: "Python", link: "/backend/linkB" },
-      { content: "Rust", link: "/backend/linkC" },
+      { content: "Java", link: "/backend/java" },
+      { content: "Python", link: "/backend/python" },
+      { content: "Rust", link: "/backend/rust" },
     ],
   },
   DataBase: {
     id: "DataBase",
     links: [
-      { content: "DBMS", link: "/database/linkA1" },
-      { content: "NoSQL", link: "/database/linkB2" },
-      { content: "NewSQL", link: "/database/linkC3" },
+      { content: "DBMS", link: "/database/dbms" },
+      { content: "NoSQL", link: "/database/nosql" },
+      { content: "NewSQL", link: "/database/newsql" },
     ],
   },
 };
@@ -111,7 +110,7 @@ export default defineComponent({
       if (accordionId in state.accordionState) {
         state.accordionState[accordionId] = !state.accordionState[accordionId];
         if (state.accordionState[accordionId]) {
-          router.push(accordionContent[accordionId].links[0].link);
+          router.push(accordionContent[accordionId].id);
         }
       } else {
         console.error("Invalid accordionId:", accordionId);
