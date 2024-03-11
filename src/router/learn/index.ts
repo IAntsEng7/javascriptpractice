@@ -7,11 +7,7 @@ const route: RouteRecordRaw = {
   children: [
     {
       path: "", // 將路徑修改為空字符串，表示為預設路徑
-      component: () => import("@/components/learn/LearnIntro.vue"),
-    },
-    {
-      path: "Java",
-      component: () => import("@/components/learn/java/JavaLearn.vue"),
+      component: () => import("@/components/learn/LearnLayout.vue"),
     },
     {
       path: "layout",

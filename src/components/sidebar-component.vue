@@ -1,7 +1,7 @@
 <template>
   <div class="sidebar">
     <!-- 左側選單 -->
-    <router-link to="/" class="router-button">Home Index</router-link>
+    <router-link to="/" class="router-button">Home</router-link>
     <router-link to="/learn" class="router-button">Learn Layout</router-link>
     <div id="accordionExample" class="accordion">
       <div
@@ -18,9 +18,9 @@
             type="button"
             :data-bs-target="`#${itemId}`"
             :aria-expanded="state.accordionState[itemId]"
-            @click="toggleAccordion(itemId)"
+            @click="handleAccordionClick(itemId)"
           >
-            Item #{{ itemId }}
+            {{ itemId }}
           </button>
         </h2>
         <div
@@ -32,7 +32,9 @@
         >
           <div class="accordion-body">
             <div v-for="(link, index) in item.links" :key="index">
-              <router-link :to="link.link">{{ link.content }}</router-link>
+              <router-link class="router-button" :to="link.link">{{
+                link.content
+              }}</router-link>
             </div>
           </div>
         </div>
@@ -47,6 +49,7 @@
 
 <script lang="ts">
 import { defineComponent, reactive } from "vue";
+import { useRouter } from "vue-router";
 
 interface AccordionLink {
   content: string;
@@ -63,46 +66,76 @@ interface AccordionState {
 }
 
 const accordionContent: Record<string, AccordionItem<string>> = {
-  collapseOne: {
-    id: "collapseOne",
+  FrontEnd: {
+    id: "frontend",
     links: [
-      { content: "Link 1", link: "/link1" },
-      { content: "Link 2", link: "/link2" },
-      { content: "Link 3", link: "/link3" },
+      { content: "JavaScript", link: "/frontend/javascript" },
+      { content: "TypeScript", link: "/frontend/typescript" },
+      { content: "Vue 3", link: "/frontend/vue3" },
     ],
   },
-  collapseTwo: {
-    id: "collapseTwo",
+  BackEnd: {
+    id: "backend",
     links: [
-      { content: "Link A", link: "/linkA" },
-      { content: "Link B", link: "/linkB" },
+      { content: "Java", link: "/backend/java" },
+      { content: "Python", link: "/backend/python" },
+      { content: "Rust", link: "/backend/rust" },
+    ],
+  },
+  DataBase: {
+    id: "database",
+    links: [
+      { content: "DBMS", link: "/database/dbms" },
+      { content: "NoSQL", link: "/database/nosql" },
+      { content: "NewSQL", link: "/database/newsql" },
     ],
   },
 };
 
 export default defineComponent({
   setup() {
+    const router = useRouter();
+
     const state = reactive<{
       accordionState: AccordionState;
     }>({
       accordionState: {
-        collapseOne: false,
-        collapseTwo: false,
+        FrontEnd: false,
+        BackEnd: false,
+        DataBase: false,
       },
     });
 
     const toggleAccordion = (accordionId: string) => {
       if (accordionId in state.accordionState) {
+        if (!state.accordionState[accordionId]) {
+          router.push(`/${accordionId}`);
+        }
+        // closeAccordions(accordionId); // 暫留：關於關掉手風琴的東西
         state.accordionState[accordionId] = !state.accordionState[accordionId];
       } else {
         console.error("Invalid accordionId:", accordionId);
       }
     };
 
+    // 暫留：關於關掉手風琴的東西
+    // const closeAccordions = (currentId: string) => {
+    //   for (const id in state.accordionState) {
+    //     if (id !== currentId) {
+    //       state.accordionState[id] = false;
+    //     }
+    //   }
+    // };
+
+    const handleAccordionClick = (itemId: string) => {
+      toggleAccordion(itemId);
+      // closeAccordions(itemId); // 暫留：關於關掉手風琴的東西
+    };
+
     return {
       accordionContent,
       state,
-      toggleAccordion,
+      handleAccordionClick,
     };
   },
 });
@@ -137,7 +170,7 @@ export default defineComponent({
 }
 
 .router-button:hover {
-  background-color: #2b2b2f; /* 滑鼠移動過去的背景色 */
+  background-color: rgb(120, 120, 120); /* 滑鼠移動過去的背景色 */
   color: #fff;
 }
 
@@ -147,7 +180,7 @@ export default defineComponent({
 }
 
 .accordion-button:not(.collapsed) {
-  background-color: rgb(255, 255, 255); /* 按鈕打開時的背景色 */
-  color: rgb(90, 89, 89); /* 按鈕打開時的文字色 */
+  background-color: rgb(90, 90, 90); /* 按鈕打開時的背景色 */
+  color: rgb(255, 255, 255); /* 按鈕打開時的文字色 */
 }
 </style>

@@ -1,7 +1,10 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
-import Intro from "@/router/intro";
-import Learn from "@/router/learn";
-import HomeIndex from "@/components/HomeIndex.vue";
+import intro from "@/router/intro";
+import learn from "@/router/learn";
+import frontend from "@/router/frontend";
+import backend from "@/router/backend";
+import database from "@/router/database";
+import homeIndex from "@/components/homeIndex.vue";
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -10,10 +13,13 @@ const routes: Array<RouteRecordRaw> = [
   },
   {
     path: "/home",
-    component: HomeIndex, // HomeIndex 作為單獨路由
+    component: homeIndex, // HomeIndex 作為單獨路由
   },
-  Intro,
-  Learn,
+  intro,
+  learn,
+  frontend,
+  backend,
+  database,
 ];
 
 const router = createRouter({
