@@ -1,22 +1,17 @@
 import { RouteRecordRaw } from "vue-router";
-import CaerusIntro from "@/components/intro/CaerusIntro.vue";
-import OtherThing from "@/components/intro/OtherThing.vue";
+import AboutMe from "@/components/intro/about-me.vue";
 
 const route: RouteRecordRaw = {
   path: "/intro",
-  component: CaerusIntro,
+  component: AboutMe,
   children: [
     {
       path: "",
-      redirect: "caerusIntro",
+      component: () => import("@/components/intro/about-me.vue"),
     },
     {
-      path: "caerusIntro",
-      component: CaerusIntro,
-    },
-    {
-      path: "otherThing",
-      component: OtherThing,
+      path: "about-me",
+      component: () => import("@/components/intro/about-me.vue"),
     },
   ],
 };
